@@ -1,0 +1,35 @@
+---
+title: "README"
+author: "Biswajit"
+date: "January 27, 2016"
+output: html_document
+---
+
+##Introduction
+
+- This repository is hosting the peer review assignment for the coursera data science specialiation course "Getting and cleaning data". 
+- This includes the code  to clean dataset (Run_analysis.R), and a codebook.
+- The programs save a file tidy.txt with tidy data of reuired standard.
+- The purpose of this project is to demonstrate the collection, work with, and cleaning of this data set. Tidy data have been prepared so can be used for later analysis.
+
+##Data Set:
+
+- The data set "Human Activity Recognition Using Smartphones" has been taken from UCI. Please follow the below link for a detailed description of the whole experiment and dataset. 
+      http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones 
+- The link for the data that has been used in this project is as below. 
+      https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
+
+##Execution and files
+
+###Files:
+- The Data Set has been stored in UCI HAR Dataset/ directory.
+
+- The CodeBook.md describes the variables, the data, and the work that has been performed to clean up the data.
+
+- The run_analysis.R is the script that has been used for this work. It can be loaded in R/Rstudio and executed without any parameters.
+
+###Execution:
+- Download the files from the provided link. 
+- Extract the data and store them at a desired location. 
+- Set your working directory to /UCI HAR Dataset.
+- Run the run_analysis.R script. This will create and store a tidy dataset as required in the name             tidydata_mean.txt.
