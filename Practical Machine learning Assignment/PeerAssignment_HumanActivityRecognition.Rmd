@@ -2,7 +2,9 @@
 title: "Human Activity Recognition-Practical ML"
 author: "Biswajit Maharathi"
 date: "April 14, 2016"
-output: html_document
+output:
+md_document:
+    variant: html_document
 ---
 
 ```{r setup, include=FALSE}
@@ -27,7 +29,7 @@ The goal of this work is to use machine learning methods to predict the way the 
 
 ##Load the required libraries and datasets 
 ```{r,results='hide'}
-library(caret)
+library(caret); set.seed(3123)
 training <- read.csv("pml-training.csv", header = TRUE, na.strings = c("NA",""))
 testing <- read.csv("pml-testing.csv", header = TRUE,na.strings = c("NA",""))
 ```
@@ -60,7 +62,7 @@ dim(trainf); dim(testf)
 
 ##Model1: Random Forest
 We will be using randomforest to create the model as below. 
-```{r}
+```{r,cache=TRUE}
 #create the model fit  RF
 control_rf <- trainControl(method="oob",number=10,repeats=5,p=0.80)
 fit_rf <- train(classe~.,data=trainf,trControl=control_rf)
@@ -93,7 +95,7 @@ test_20_predict
 
 ##Model2: GBM
 We will also be validating the model with a boosting method, and cross verify how these two models work. 
-```{r}
+```{r,cache=TRUE}
 #gbm model 
 # cross validate with GBM
 control_gbm <- trainControl(method="cv",number=3, allowParallel=TRUE, verbose=TRUE)
