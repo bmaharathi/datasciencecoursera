@@ -1,4 +1,9 @@
-This is a assignment project on human activity recognition for Practical Machine learning course on Coursera. \#\#Introduction Activity monitoring devices like fitbit or jawbone up are now capable of collecting huge amount of information with least of expenses. This collected activity data can be quantified and converted to easy to understand data formats where we can analyse and interpret our activities. Such data was collected by 6 fitness enthusiastics and was made available at <http://groupware.les.inf.puc-rio.br/har> .
+This is a assignment project on human activity recognition for Practical Machine learning course on Coursera.
+
+Introduction 
+-------------
+
+Activity monitoring devices like fitbit or jawbone up are now capable of collecting huge amount of information with least of expenses. This collected activity data can be quantified and converted to easy to understand data formats where we can analyse and interpret our activities. Such data was collected by 6 fitness enthusiastics and was made available at <http://groupware.les.inf.puc-rio.br/har> .
 
 The datasets are available on the below links. The training data for this project are available here:
 
