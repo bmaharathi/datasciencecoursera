@@ -1,0 +1,121 @@
+---
+title: "Human Activity Recognition-Practical ML"
+author: "Biswajit Maharathi"
+date: "April 14, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This is a assignment project on human activity recognition for Practical Machine learning course on Coursera. 
+##Introduction 
+Activity monitoring devices like fitbit or jawbone up are now capable of collecting huge amount of information with least of expenses. This collected activity data can be quantified and converted  to easy to understand data formats where we can analyse and interpret our activities. Such data was collected by 6 fitness enthusiastics and was made available at http://groupware.les.inf.puc-rio.br/har .
+
+The datasets are available on the below links. 
+The training data for this project are available here:
+
+https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv
+
+The test data are available here:
+
+https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv
+
+The goal of this work is to use machine learning methods to predict the way the participants did their eercise. We will be using the accelerometer data available to predict the values. 
+
+
+##Load the required libraries and datasets 
+```{r,results='hide'}
+library(caret)
+training <- read.csv("pml-training.csv", header = TRUE, na.strings = c("NA",""))
+testing <- read.csv("pml-testing.csv", header = TRUE,na.strings = c("NA",""))
+```
+
+## Data cleaning and selection 
+The dataset has a huge number of colums and there are many fields that are empty. We need to clean the data and use only the information that is required for the prediction model. 
+
+###Removing the empty columns
+```{r}
+nacols <- colSums(is.na(training))
+#remove the colums with NA values in all rows 
+train2 <- training[,colSums(is.na(training)) ==0]
+test2 <- testing[,colSums(is.na(training)) ==0]
+```
+###Removing the unnecessary columns 
+```{r}
+#remove unnecessary columns like x, name and timestamp.
+train3 <- train2[, -grep("X|user_name|timestamp|new_window", colnames(train2))]
+test3 <- test2[, -grep("X|user_name|timestamp|new_window", colnames(train2))]
+```
+
+For the above data train3, we will create datasets that will be used to train and test the model that we can creating. For this purpose, we will use 70% of data for training and 30% for testing. 
+```{r}
+#create data partition to train and test 
+traind <- createDataPartition(train3$classe,p=0.7,list=FALSE)
+trainf <- train3[traind,]
+testf <- train3[-traind,]
+dim(trainf); dim(testf)
+```
+
+##Model1: Random Forest
+We will be using randomforest to create the model as below. 
+```{r}
+#create the model fit  RF
+control_rf <- trainControl(method="oob",number=10,repeats=5,p=0.80)
+fit_rf <- train(classe~.,data=trainf,trControl=control_rf)
+#plot final model for error curve 
+plot(fit_rf$finalModel)
+```
+
+Lets see the performace of the model on train and test data. 
+```{r}
+#performance of model on training data
+predict_trainf <- predict(fit_rf,trainf)
+confusionMatrix(predict_trainf,trainf$classe)
+```
+We can see the accuracy of the model on the training data on which it is build is 1. Now lets see its performance with testing data. 
+```{r}
+#performance of model on testing data
+predict_testf <- predict(fit_rf,testf)
+confusionMatrix(predict_testf,testf$classe)
+```
+
+Observe, that the accuracy has slightly decreased. 
+
+Lets predict the for the actual data set, for which we were supposed to predict. 
+```{r}
+#actual testing dataset
+predict20 <-predict(fit_rf, test3)
+test_20_predict <- data.frame(predict20)
+test_20_predict
+```
+
+##Model2: GBM
+We will also be validating the model with a boosting method, and cross verify how these two models work. 
+```{r}
+#gbm model 
+# cross validate with GBM
+control_gbm <- trainControl(method="cv",number=3, allowParallel=TRUE, verbose=TRUE)
+fit_gbm <- train(classe~., data=trainf, method="gbm",trControl=control_gbm, verbose=FALSE)
+fit_gbm
+plot(fit_gbm$finalModel)
+```
+
+Lets see how the model perrforms for training data 
+```{r}
+predict_gbm_trainf <- predict(fit_gbm,trainf)
+confusionMatrix(predict_gbm_trainf, trainf$classe)
+```
+And its performance on testing data
+```{r}
+predict_gbm_test<- predict(fit_gbm, testf)
+confusionMatrix(predict_gbm_test, testf$classe)
+```
+
+Lets compare the output of both the models 
+```{r}
+confusionMatrix(predict_testf,predict_gbm_test)
+```
+We can see although these two models are not exactly same however, 99% prediction is coming accurate. 
+```{r}

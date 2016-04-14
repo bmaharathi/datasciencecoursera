@@ -16,39 +16,14 @@ The sensor signals (accelerometer and gyroscope) were pre-processed by applying 
 
 ##For each record it provides:
 
-- Triaxial acceleration from the accelerometer (total acceleration) and the estimated body acceleration.
-- Triaxial Angular velocity from the gyroscope. 
-- A 561-feature vector with time and frequency domain variables. 
-- Its activity label. 
-- An identifier of the subject who carried out the experiment.
+- 
 
 ###The dataset includes the following files:
 
-- 'README.txt'
-
-- 'features_info.txt': Shows information about the variables used on the feature vector.
-
-- 'features.txt': List of all features.
-
-- 'activity_labels.txt': Links the class labels with their activity name.
-
-- 'train/X_train.txt': Training set.
-
-- 'train/y_train.txt': Training labels.
-
-- 'test/X_test.txt': Test set.
-
-- 'test/y_test.txt': Test labels.
-
-###The following files are available for the train and test data. Their descriptions are equivalent. 
-
-- 'train/subject_train.txt': Each row identifies the subject who performed the activity for each window sample.     Its range is from 1 to 30. 
-
-- 'train/Inertial Signals/total_acc_x_train.txt': The acceleration signal from the smartphone accelerometer X     axis in standard gravity units 'g'. Every row shows a 128 element vector. The same description applies for the   'total_acc_x_train.txt' and 'total_acc_z_train.txt' files for the Y and Z axis. 
-
-- 'train/Inertial Signals/body_acc_x_train.txt': The body acceleration signal obtained by subtracting the          gravity from the total acceleration. 
-
-- 'train/Inertial Signals/body_gyro_x_train.txt': The angular velocity vector measured by the gyroscope for each    window sample. The units are radians/second. 
+- CODEBOOK.rmd
+- README.rmd
+- run_analysis.R : R script to clean the provided data set
+- tidydata_mean.txt : clean dataset as required.
 
 ###Variables
 
@@ -61,6 +36,89 @@ Finally a Fast Fourier Transform (FFT) was applied to some of these signals prod
 These signals were used to estimate variables of the feature vector for each pattern:
 '-XYZ' is used to denote 3-axial signals in the X, Y and Z directions.
 
+### List of Variables 
+
+[1] "subjectId"                                                           
+ [2] "activityName"                                                        
+ [3] "TimeDomain.Body.Acceleration.Mean.X"                                 
+ [4] "TimeDomain.Body.Acceleration.Mean.Y"                                 
+ [5] "TimeDomain.Body.Acceleration.Mean.Z"                                 
+ [6] "TimeDomain.Body.Acceleration.StandardDeviation.X"                    
+ [7] "TimeDomain.Body.Acceleration.StandardDeviation.Y"                    
+ [8] "TimeDomain.Body.Acceleration.StandardDeviation.Z"                    
+ [9] "TimeDomain.Gravity.Acceleration.Mean.X"                              
+[10] "TimeDomain.Gravity.Acceleration.Mean.Y"                              
+[11] "TimeDomain.Gravity.Acceleration.Mean.Z"                              
+[12] "TimeDomain.Gravity.Acceleration.StandardDeviation.X"                 
+[13] "TimeDomain.Gravity.Acceleration.StandardDeviation.Y"                 
+[14] "TimeDomain.Gravity.Acceleration.StandardDeviation.Z"                 
+[15] "TimeDomain.Body.AccelerationJerk.Mean.X"                             
+[16] "TimeDomain.Body.AccelerationJerk.Mean.Y"                             
+[17] "TimeDomain.Body.AccelerationJerk.Mean.Z"                             
+[18] "TimeDomain.Body.AccelerationJerk.StandardDeviation.X"                
+[19] "TimeDomain.Body.AccelerationJerk.StandardDeviation.Y"                
+[20] "TimeDomain.Body.AccelerationJerk.StandardDeviation.Z"                
+[21] "TimeDomain.BodyGyro.Mean.X"                                          
+[22] "TimeDomain.BodyGyro.Mean.Y"                                          
+[23] "TimeDomain.BodyGyro.Mean.Z"                                          
+[24] "TimeDomain.BodyGyro.StandardDeviation.X"                             
+[25] "TimeDomain.BodyGyro.StandardDeviation.Y"                             
+[26] "TimeDomain.BodyGyro.StandardDeviation.Z"                             
+[27] "TimeDomain.BodyGyroJerk.Mean.X"                                      
+[28] "TimeDomain.BodyGyroJerk.Mean.Y"                                      
+[29] "TimeDomain.BodyGyroJerk.Mean.Z"                                      
+[30] "TimeDomain.BodyGyroJerk.StandardDeviation.X"                         
+[31] "TimeDomain.BodyGyroJerk.StandardDeviation.Y"                         
+[32] "TimeDomain.BodyGyroJerk.StandardDeviation.Z"                         
+[33] "TimeDomain.Body.AccelerationMagnitude.Mean"                          
+[34] "TimeDomain.Body.AccelerationMagnitude.StandardDeviation"             
+[35] "TimeDomain.Gravity.AccelerationMagnitude.Mean"                       
+[36] "TimeDomain.Gravity.AccelerationMagnitude.StandardDeviation"          
+[37] "TimeDomain.Body.AccelerationJerkMagnitude.Mean"                      
+[38] "TimeDomain.Body.AccelerationJerkMagnitude.StandardDeviation"         
+[39] "TimeDomain.BodyGyroMagnitude.Mean"                                   
+[40] "TimeDomain.BodyGyroMagnitude.StandardDeviation"                      
+[41] "TimeDomain.BodyGyroJerkMagnitude.Mean"                               
+[42] "TimeDomain.BodyGyroJerkMagnitude.StandardDeviation"                  
+[43] "FrequencyDomain.Body.Acceleration.Mean.X"                            
+[44] "FrequencyDomain.Body.Acceleration.Mean.Y"                            
+[45] "FrequencyDomain.Body.Acceleration.Mean.Z"                            
+[46] "FrequencyDomain.Body.Acceleration.StandardDeviation.X"               
+[47] "FrequencyDomain.Body.Acceleration.StandardDeviation.Y"               
+[48] "FrequencyDomain.Body.Acceleration.StandardDeviation.Z"               
+[49] "FrequencyDomain.Body.Acceleration.MeanFrequency.X"                   
+[50] "FrequencyDomain.Body.Acceleration.MeanFrequency.Y"                   
+[51] "FrequencyDomain.Body.Acceleration.MeanFrequency.Z"                   
+[52] "FrequencyDomain.Body.AccelerationJerk.Mean.X"                        
+[53] "FrequencyDomain.Body.AccelerationJerk.Mean.Y"                        
+[54] "FrequencyDomain.Body.AccelerationJerk.Mean.Z"                        
+[55] "FrequencyDomain.Body.AccelerationJerk.StandardDeviation.X"           
+[56] "FrequencyDomain.Body.AccelerationJerk.StandardDeviation.Y"           
+[57] "FrequencyDomain.Body.AccelerationJerk.StandardDeviation.Z"           
+[58] "FrequencyDomain.Body.AccelerationJerk.MeanFrequency.X"               
+[59] "FrequencyDomain.Body.AccelerationJerk.MeanFrequency.Y"               
+[60] "FrequencyDomain.Body.AccelerationJerk.MeanFrequency.Z"               
+[61] "FrequencyDomain.BodyGyro.Mean.X"                                     
+[62] "FrequencyDomain.BodyGyro.Mean.Y"                                     
+[63] "FrequencyDomain.BodyGyro.Mean.Z"                                     
+[64] "FrequencyDomain.BodyGyro.StandardDeviation.X"                        
+[65] "FrequencyDomain.BodyGyro.StandardDeviation.Y"                        
+[66] "FrequencyDomain.BodyGyro.StandardDeviation.Z"                        
+[67] "FrequencyDomain.BodyGyro.MeanFrequency.X"                            
+[68] "FrequencyDomain.BodyGyro.MeanFrequency.Y"                            
+[69] "FrequencyDomain.BodyGyro.MeanFrequency.Z"                            
+[70] "FrequencyDomain.Body.AccelerationMagnitude.Mean"                     
+[71] "FrequencyDomain.Body.AccelerationMagnitude.StandardDeviation"        
+[72] "FrequencyDomain.Body.AccelerationMagnitude.MeanFrequency"            
+[73] "FrequencyDomain.BodyBody.AccelerationJerkMagnitude.Mean"             
+[74] "FrequencyDomain.BodyBody.AccelerationJerkMagnitude.StandardDeviation"
+[75] "FrequencyDomain.BodyBody.AccelerationJerkMagnitude.MeanFrequency"    
+[76] "FrequencyDomain.BodyBodyGyroMagnitude.Mean"                          
+[77] "FrequencyDomain.BodyBodyGyroMagnitude.StandardDeviation"             
+[78] "FrequencyDomain.BodyBodyGyroMagnitude.MeanFrequency"                 
+[79] "FrequencyDomain.BodyBodyGyroJerkMagnitude.Mean"                      
+[80] "FrequencyDomain.BodyBodyGyroJerkMagnitude.StandardDeviation"         
+[81] "FrequencyDomain.BodyBodyGyroJerkMagnitude.MeanFrequency"
 
 ## Code for run_analysis.R
 
